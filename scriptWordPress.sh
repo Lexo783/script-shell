@@ -4,6 +4,20 @@ if [ -z $DOMAIN_NAME ]; then
  read -p "Enter your domain : " DOMAIN_NAME
 fi
 
+if [ -z $DB_NAME ]; then
+ read -p "Enter your sql db name : " DB_NAME
+fi
+
+if [ -z $SQL_USER ]; then
+ read -p "Enter your sql pseudo : " SQL_USER
+fi
+
+if [ -z $SQL_PASSWORD ]; then
+ read -p "Enter your sql password : " SQL_PASSWORD
+fi
+
+
+
 DIR="/var/www/${DOMAIN_NAME}"
 mkdir $DIR
 
@@ -22,11 +36,33 @@ if [ -d $DIR ]; then
  cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
  mkdir /tmp/wordpress/wp-content/upgrade
  sudo cp -a /tmp/wordpress/. $DIR
- # sed $DIR
+ sed $DIR
+ WORDPRESS_KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
+ cp "./wp-config.template.php ./wp-config.copy.php"
+ sed -i 's/word_press_keys/`$WORDPRESS_KEYS`/g' 'wp-config.php'
+ mv wp-config.copy.php  /var/www/$DOMAIN_NAME/wp-config.php
 else
  echo "Error file didn't exist"
 fi
-WORDPRESS_KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
-cp wp-config.template.php wp-config.copy.php
-sed -i 's/word_press_keys/$WORDPRESS_KEYS/g' wp-config.php
-mv wp-config.php  /var/www/$DOMAIN_NAME/wp-config.php
+
+
+ WORDPRESS_KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
+ cp wp-config.template.php wp-config.copy.php
+
+ sed -i -e s/database_name_here/${DB_NAME}/g 'wp-config.copy.php'
+ sed -i -e s/username_here/${SQL_USER}/g 'wp-config.copy.php'
+ sed -i -e s/password_here/${SQL_PASSWORD}/g 'wp-config.copy.php'
+
+ echo "\n /**#@+
+ * Authentication Unique Keys and Salts.
+ *
+ * Change these to different unique phrases!
+ * You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}
+ * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
+ *
+ * @since 2.6.0
+ */ 
+ 
+ $WORDPRESS_KEYS 
+ 
+ /**#@-*/" >>  wp-config.copy.php
