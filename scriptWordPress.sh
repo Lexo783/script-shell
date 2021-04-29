@@ -61,8 +61,8 @@ fi
  * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
  *
  * @since 2.6.0
- */ 
- 
- $WORDPRESS_KEYS 
- 
+ */
+
+ $WORDPRESS_KEYS
+
  /**#@-*/" >>  wp-config.copy.php
