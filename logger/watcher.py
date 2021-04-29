@@ -14,15 +14,15 @@ def exitScript():
 
 def banIp(ip):
     subprocess.call(f"iptables -A INPUT -s {ip} -j DROP", shell=True)
-    print(f"{ip} is now banned!")
+    print(f"{ip} is banned!")
 
 
 def purgeFireWall():
     subprocess.call(f"iptables -F", shell=True)
-    print("\niptables purged!")
+    print("\nyou are no longer protected and the ip have been purged")
 
 
-domain_name = input('Entrez votre nom de domain  : ')
+domain_name = input('Enter your domain name: ')
 
 log_file = subprocess.Popen(["tail", "-F", '/var/log/apache2/access.'+domain_name+'.log'],
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
