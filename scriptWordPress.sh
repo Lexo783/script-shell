@@ -26,3 +26,7 @@ if [ -d $DIR ]; then
 else
  echo "Error file didn't exist"
 fi
+WORDPRESS_KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
+cp wp-config.template.php wp-config.copy.php
+sed -i 's/word_press_keys/$WORDPRESS_KEYS/g' wp-config.php
+mv wp-config.php  /var/www/$DOMAIN_NAME/wp-config.php
