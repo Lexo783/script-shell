@@ -38,6 +38,6 @@ if [ -z $DOMAIN_NAME ]; then
  usage
 else
  sh scriptDNS.sh
- sh scriptWordPress.sh
  sh scriptMySql.sh
+ sh scriptWordPress.sh
 fi
