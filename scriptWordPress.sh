@@ -1,21 +1,5 @@
 #!bin/bash
 
-if [ -z $DOMAIN_NAME ]; then
- read -p "Enter your domain : " DOMAIN_NAME
-fi
-
-if [ -z $DB_NAME ]; then
- read -p "Enter your sql db name : " DB_NAME
-fi
-
-if [ -z $SQL_USER ]; then
- read -p "Enter your sql pseudo : " SQL_USER
-fi
-
-if [ -z $SQL_PASSWORD ]; then
- read -p "Enter your sql password : " SQL_PASSWORD
-fi
-
 print(){
 
  echo "\n /**#@+

@@ -8,7 +8,7 @@
 
 unset DOMAIN_NAME SQL_USER SQL_PASSWORD DB_NAME
 
-while getopts 'hd:u:p:n' o
+while getopts 'hd:u:p:n:' o
 do
     # si il trouve l'option il attribu #
     case $o in
@@ -23,20 +23,31 @@ export SQL_USER
 export SQL_PASSWORD
 export DB_NAME
 
-
 usage()
 {
   echo "Usage: initialisation
 	[ -d ] [ -d DOMAIN_NAME]
 	[ -p ] [ -p MYSQL_USER_PASSWORD ]
 	[ -u ] [ -u MYSQL_USER_PSEUDO ]
-	[ -h ] [ -h HELP ]"
+	[ -h ] [ -h HELP ]
+	[ -n ] [ -n DB_NAME]"
   exit 2
 }
 
-if [ -z $DOMAIN_NAME ]; then 
+if [ -z $DOMAIN_NAME ]; then
+ echo "Enter Domaine Name"
+ usage
+elif [ -z $DB_NAME ]; then
+ echo "Enter DB Name"
+ usage
+elif [ -z $SQL_USER ]; then
+ echo "Enter SQL User"
+ usage
+elif [ -z $SQL_PASSWORD ]; then
+ echo "Enter SQL Password"
  usage
 else
- sh scriptDNS.sh
-# sh scriptWordPress.sh
+ #sh scriptDNS.sh
+ sh scriptSQL.sh
+ #sh scriptWordPress.sh
 fi
