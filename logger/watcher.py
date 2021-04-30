@@ -34,4 +34,4 @@ while True:
     if poll.poll(1):
         signal.signal(signal.SIGTERM, exitScript)
         log = log_file.stdout.readline().decode("utf-8").replace('"', " ").split(" ")
-        os.system("sh test.sh -d "+domain_name)
+        os.system("sh fail2ban.sh -d "+domain_name)
