@@ -40,14 +40,13 @@ help()
 	[ -p ] [ -p MYSQL_USER_PASSWORD ] this is the password associated  in your db with your domain name and is required
 	[ -u ] [ -u MYSQL_USER_PSEUDO ] this is the user name wich is create on your system and associated to your password and is required
   [ -h ] [ -h HELP ] more information about the script
-  
+
   EXAMPLE : sudo sh script.sh -d jesuisundev.com -p test_pwd -u test_user
   "
   exit 2
 }
-
-if [ -n $HELP ]; then
-  help
+if [ $HELP ]; then
+ help
 fi
 
 if [ -z $DOMAIN_NAME ]; then
