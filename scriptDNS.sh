@@ -11,8 +11,11 @@ printVirtualHost(){
      DocumentRoot /var/www/$DOMAIN_NAME
      ErrorLog ${APACHE_LOG_DIR}/error.log
      CustomLog ${APACHE_LOG_DIR}/access.log combined
- </VirtualHost>"
- >> $DOMAIN_NAME.php
+ </VirtualHost>
+ <Directory /var/www/wordpress/>
+    AllowOverride All
+ </Directory>
+" >> $DOMAIN_NAME.conf
 }
 
 mkdir /var/www/$DOMAIN_NAME
@@ -24,7 +27,7 @@ a2ensite $DOMAIN_NAME
 a2dissite 000-default
 
 # return value of test
-sudo apache2ctl configtest
-sudo systemctl reload apache2
+apache2ctl configtest
+systemctl reload apache2
 
 cd /

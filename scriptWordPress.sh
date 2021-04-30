@@ -29,13 +29,19 @@ grep ww-data /etc/group
 if [ -d $DIR ]; then
  # Take action if $DIR exists. #
  echo "Installing website on /tmp ..."
+ touch /etc/apache2/sites-available/$DOMAIN_NAME.conf
+
+ a2enmod rewrite
+ apache2ctl configtest
+ systemctl restart apache2
+
  cd /tmp
  curl -O https://wordpress.org/latest.tar.gz
  tar xzvf latest.tar.gz
  touch /tmp/wordpress/.htaccess
  cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php
  mkdir /tmp/wordpress/wp-content/upgrade
- sudo cp -a /tmp/wordpress/. $DIR
+ cp -a /tmp/wordpress/. $DIR
 
  WORDPRESS_KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
  cd /projetGit

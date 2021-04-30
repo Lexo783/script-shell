@@ -47,7 +47,7 @@ elif [ -z $SQL_PASSWORD ]; then
  echo "Enter SQL Password"
  usage
 else
- #sh scriptDNS.sh
+ sh scriptDNS.sh
  sh scriptSQL.sh
- #sh scriptWordPress.sh
+ sh scriptWordPress.sh
 fi
