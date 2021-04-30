@@ -12,7 +12,7 @@ while getopts 'hd:u:p:' o
 do
     # si il trouve l'option il attribu #
     case $o in
-     h) HELP=1
+     h) HELP=1;;
      d) DOMAIN_NAME=$OPTARG;;
      u) SQL_USER=$OPTARG;;
      p) SQL_PASSWORD=$OPTARG;;
