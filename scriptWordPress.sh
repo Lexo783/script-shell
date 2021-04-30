@@ -21,8 +21,8 @@ print(){
 DIR="/var/www/${DOMAIN_NAME}"
 mkdir $DIR
 
-useradd $DOMAIN_NAME
-adduser $DOMAIN_NAME www-data
+useradd $SQL_USER
+adduser $SQL_USER www-data
 
 grep ww-data /etc/group
 
@@ -44,7 +44,8 @@ if [ -d $DIR ]; then
  cp -a /tmp/wordpress/. $DIR
 
  WORDPRESS_KEYS=$(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
- cd $PWD
+ cd $
+ echo $PWD
  cp wp-config.template.php wp-config.copy.php
 
  sed -i -e s/database_name_here/${DB_NAME}/g 'wp-config.copy.php'
