@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 # set une valeur et l'envoyer dans des scripts enfants DB_NAME=toto #
 # export la variable export DB_NAME #
@@ -7,7 +7,6 @@
 # rechercher les options possible #
 
 unset DOMAIN_NAME SQL_USER SQL_PASSWORD DB_NAME
-
 while getopts 'hd:u:p:n:' o
 do
     # si il trouve l'option il attribu #
@@ -18,10 +17,12 @@ do
      n) DB_NAME=$OPTARG;;
     esac
 done
+
 export DOMAIN_NAME
 export SQL_USER
 export SQL_PASSWORD
 export DB_NAME
+export PATH_VM
 
 usage()
 {

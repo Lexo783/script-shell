@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 printVirtualHost(){
  touch /var/log/apache2/access.$DOMAIN_NAME.log
@@ -12,10 +12,11 @@ printVirtualHost(){
     DocumentRoot /var/www/$DOMAIN_NAME
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <Directory /var/www/wordpress/>
+    	 AllowOverride All
+    </Directory>
  </VirtualHost>
- <Directory /var/www/wordpress/>
-    AllowOverride All
- </Directory>
 " >> $DOMAIN_NAME.conf
 }
 
