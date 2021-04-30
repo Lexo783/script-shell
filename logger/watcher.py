@@ -24,7 +24,7 @@ def purgeFireWall():
 
 domain_name = input('Enter your domain name: ')
 
-log_file = subprocess.Popen(["tail", "-F", '/var/log/apache2/access.'+domain_name+'.log'],
+log_file = subprocess.Popen(["tail", "-F", '/var/log/apache2/access.log'],
                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 poll = select.poll()
 

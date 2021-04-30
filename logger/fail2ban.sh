@@ -25,7 +25,7 @@ if [ -z $DOMAIN_NAME ]; then
  usage
 else
 error='"POST /wp-login.php HTTP/1.1" 200'
-ips=`grep "$error" "/var/log/apache2/access.$DOMAIN_NAME.log" | cut -d' ' -f1`
+ips=`grep "$error" "/var/log/apache2/access.log" | cut -d' ' -f1`
 
 echo "$ips" > $DOMAIN_NAME.copy.txt
 echo `sort $DOMAIN_NAME.copy.txt | uniq -c ` > $DOMAIN_NAME.copy.txt
