@@ -6,7 +6,7 @@
 
 # rechercher les options possible #
 
-unset DOMAIN_NAME SQL_USER SQL_PASSWORD DB_NAME HELP
+unset DOMAIN_NAME SQL_USER SQL_PASSWORD DB_NAME HELP SCRIPT_PATH
 
 while getopts 'hd:u:p:' o
 do
@@ -22,6 +22,8 @@ export DOMAIN_NAME
 export SQL_USER
 export SQL_PASSWORD
 export HELP
+export SCRIPT_PATH
+
 
 usage()
 {
@@ -59,6 +61,7 @@ elif [ -z $SQL_PASSWORD ]; then
  echo "Enter SQL Password"
  usage
 else
+ SCRIPT_PATH = $PWD
  sh scriptDNS.sh
  sh scriptSQL.sh
  sh scriptWordPress.sh
