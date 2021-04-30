@@ -61,7 +61,7 @@ elif [ -z $SQL_PASSWORD ]; then
  echo "Enter SQL Password"
  usage
 else
- SCRIPT_PATH = $PWD
+ SCRIPT_PATH=$PWD
  sh scriptDNS.sh
  sh scriptSQL.sh
  sh scriptWordPress.sh
