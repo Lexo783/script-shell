@@ -13,7 +13,7 @@ printVirtualHost(){
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-    <Directory /var/www/wordpress/>
+    <Directory /var/www/$DOMAIN_NAME/>
     	 AllowOverride All
     </Directory>
  </VirtualHost>
